@@ -1,0 +1,961 @@
+/* --- 1. BEST PRACTICE: CSS VARIABLES (NUANSA COKLAT) --- */
+:root {
+    /* Warna Utama: Coklat Elegan (Mirip warna kayu/kopi) */
+    --primary-color: #8D6E63; 
+    /* Warna Hover: Coklat Lebih Tua (Dark Coffee) */
+    --primary-dark: #5D4037; 
+    --text-dark: #3E2723; /* Teks jadi coklat sangat tua (bukan hitam pekat) agar lebih lembut */
+    --text-light: #795548; /* Teks deskripsi jadi coklat sedang */
+    /* Background Light: Krem/Gading (Warm White) agar tidak terlalu dingin */
+    --bg-light: #FDFBF7; 
+    --white: #ffffff;
+    --max-width: 110rem;
+    --nav-height: 7rem;
+}
+
+/* --- 2. RESET & GLOBAL STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden !important;
+    position: relative;
+}
+
+/* RAHASIA KONVERSI MUDAH */
+html {
+    font-size: 62.5%; /* Membuat 1rem = 10px */
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Mengembalikan ukuran font standar ke 16px */
+    font-size: 1.6rem; 
+    line-height: 1.6;
+    color: var(--text-dark);
+    /* Padding agar konten tidak tertutup navbar yang fixed */
+    padding-top: var(--nav-height); 
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: auto;
+}
+
+/* --- 3. NAVIGATION BAR --- */
+.navbar {
+    background: var(--white);
+    height: var(--nav-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    /* Box shadow tetap pakai px karena ukurannya kecil & spesifik */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    /* Sebelumnya 1.5rem (24px). Sekarang 1rem=10px, jadi harus 2.4rem agar tetap 24px */
+    font-size: 2.4rem; 
+    font-weight: bold;
+    color: #2c3e50;
+}
+.logo span { 
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem; /* 25px -> 2.5rem */
+    align-items: center;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary-color);
+}
+
+.btn-nav {
+    background: var(--primary-color);
+    color: var(--white) !important;
+    padding: 0.8rem 2rem; /* 8px 20px -> 0.8rem 2rem */
+    border-radius: 0.5rem; /* 5px -> 0.5rem */
+}
+
+.btn-nav:hover {
+    background: var(--primary-dark);
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+.bar {
+    display: block;
+    width: 2.5rem;  /* 25px -> 2.5rem */
+    height: 0.3rem; /* 3px -> 0.3rem */
+    margin: 0.5rem auto; /* 5px -> 0.5rem */
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-dark);
+}
+
+/* --- 4. HERO SECTION --- */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../image/exterior.webp') no-repeat center center/cover; 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    background-color: #2c3e50; 
+}
+
+.hero h1 { 
+    /* Sebelumnya 3.5rem (56px). Dikonversi menjadi 5.6rem */
+    font-size: 5.6rem; 
+    margin-bottom: 1.5rem; /* 15px -> 1.5rem */
+}
+.hero p { 
+    font-size: 1.8rem; /* Disesuaikan agar sekitar 18px */
+    margin-bottom: 3rem; /* 30px -> 3rem */
+    max-width: 60rem; /* 600px -> 60rem */
+    margin-left: auto; margin-right: auto; 
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1.2rem 3rem; /* 12px 30px -> 1.2rem 3rem */
+    border-radius: 0.5rem; /* 5px -> 0.5rem */
+    font-size: 1.8rem; /* Sekitar 18px */
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+/* --- 5. SERVICES SECTION --- */
+.services { 
+    padding: 8rem 0; /* Sebelumnya 5rem (80px di browser default). Jadi 8rem */
+    text-align: center; 
+    background: var(--bg-light); 
+}
+.section-title { 
+    font-size: 3.2rem; /* Sekitar 32px */
+    margin-bottom: 1rem; /* 10px -> 1rem */
+    color: #2c3e50; 
+}
+.section-subtitle { 
+    color: var(--text-light); 
+    margin-bottom: 3rem; 
+    font-size: 1.6rem;
+}
+
+.service-grid {
+    display: grid;
+    /* 280px -> 28rem */
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 3rem; /* 30px -> 3rem */
+}
+
+.service-card {
+    background: var(--white);
+    padding: 4rem; /* 40px -> 4rem */
+    border-radius: 0.8rem; /* 8px -> 0.8rem */
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05); /* Shadow boleh pakai rem atau px */
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-1rem); 
+} /* -10px -> -1rem */
+
+.service-icon { 
+    font-size: 4.8rem; /* Sekitar 48px */
+    color: var(--primary-color); 
+    margin-bottom: 2rem; 
+}
+
+.service-card h3 { 
+    font-size: 2rem;
+    margin-bottom: 1rem; 
+}
+
+.service-card p { 
+    font-size: 1.5rem; 
+}
+
+/* --- 6. FEATURES SECTION (Revised) --- */
+.features {
+    padding: 6rem 0;
+    background-color: var(--white); /* Ganti background biru jadi putih bersih */
+    border-top: 1px solid #f0f0f0; /* Garis pemisah tipis di atas */
+    text-align: center;
+}
+
+.features-grid {
+    display: grid;
+    /* Grid responsif 3 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 3rem;
+}
+
+.feature-item {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: center;
+    /* Memberikan efek kartu dengan bayangan halus */
+    box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.05); 
+    border: 1px solid #eee; /* Border tipis agar rapi */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efek saat mouse diarahkan ke kartu */
+.feature-item:hover {
+    transform: translateY(-0.5rem); /* Kartu naik sedikit */
+    border-color: var(--primary-color); /* Border jadi biru */
+}
+
+/* Styling Lingkaran Ikon */
+.feature-icon {
+    width: 8rem;
+    height: 8rem;
+    /* Ganti background biru transparan jadi Coklat Transparan */
+    background: rgba(141, 110, 99, 0.15); 
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem auto;
+    font-size: 3rem;
+}
+
+.feature-item h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark); /* Teks jadi gelap (bukan putih lagi) */
+}
+
+.feature-item p {
+    font-size: 1.5rem;
+    color: var(--text-light); /* Teks abu-abu */
+    line-height: 1.6;
+}
+
+/* --- 7. FOOTER --- */
+footer {
+    /* Ganti warna background footer */
+    background: #3E2723; /* Dark Chocolate */
+    color: #efebe9; /* Teks agak krem dikit biar enak dibaca */
+    padding: 4rem 0 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3rem; /* 30px -> 3rem */
+}
+
+.footer-section {
+    flex: 1; 
+    min-width: 25rem; 
+}
+
+.footer-section h3 { 
+    color: var(--white); 
+    margin-bottom: 2rem; 
+    font-size: 2rem; 
+}
+
+.footer-section ul li {
+    margin-bottom: 1rem; 
+    font-size: 1.5rem; 
+}
+
+.footer-bottom { 
+    text-align: center; 
+    border-top: 1px solid #444; /* Border tetap 1px */
+    padding-top: 2rem; 
+    margin-top: 4rem; 
+    font-size: 1.4rem;
+}
+
+/* --- Tambahan untuk Footer Link (Sisipkan di baris 282) --- */
+.footer-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.footer-contact-row i {
+    width: 2rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.footer-link {
+    color: #ddd;
+    transition: 0.3s;
+}
+
+.footer-link:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.map-link {
+    text-decoration: underline;
+    color: var(--white); 
+}
+
+/* =========================================
+   --- 8. MEDIA QUERIES (RESPONSIVE) ---
+   ========================================= */
+
+/* Untuk Breakpoints (768px, 480px), lebih aman tetap menggunakan px 
+   agar konsisten dengan settingan device/browser */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: var(--nav-height); 
+        height: calc(100vh - var(--nav-height)); 
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+        width: 50%; 
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-in;
+        box-shadow: -0.2rem 0 1rem rgba(0,0,0,0.1);
+    }
+
+    .nav-links.nav-active {
+        transform: translateX(0%);
+    }
+
+    .menu-toggle { display: block; }
+
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(0.8rem) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-0.8rem) rotate(-45deg); }
+
+    .hero h1 { font-size: 4rem; } /* Turunkan sedikit di HP */
+    .hero p { font-size: 1.6rem; padding: 0 2rem; }
+    
+    .service-grid { padding: 0 2rem; }
+}
+
+@media screen and (max-width: 480px) {
+    .nav-links { width: 100%; } 
+    .hero h1 { font-size: 3.2rem; }
+}
+
+/* --- 9. UTILITY CLASS --- */
+body.no-scroll {
+    overflow: hidden; 
+    height: 100vh; 
+}
+
+/* --- 10. FLOATING WHATSAPP BUTTON --- */
+.float-wa {
+    position: fixed; 
+    width: 6rem;     /* 60px -> 6rem */
+    height: 6rem;    /* 60px -> 6rem */
+    bottom: 3rem;    /* 30px -> 3rem */
+    right: 3rem;     /* 30px -> 3rem */
+    background-color: #25d366; 
+    color: #FFF;
+    border-radius: 50%; /* Gunakan % untuk bulat sempurna */
+    text-align: center;
+    font-size: 3rem; /* 30px -> 3rem */
+    box-shadow: 0.2rem 0.2rem 0.3rem #999; 
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.3s ease; 
+}
+
+.float-wa:hover {
+    background-color: #128c7e; 
+    transform: scale(1.1); 
+}
+
+.my-float {
+    margin-top: 0.1rem; 
+}
+
+.float-wa::before {
+    content: "Butuh Bantuan?"; 
+    position: absolute;
+    right: 7rem; /* 70px -> 7rem */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem; /* 5px 10px -> 0.5rem 1rem */
+    border-radius: 0.5rem;
+    font-size: 1.2rem; /* 12px -> 1.2rem */
+    white-space: nowrap; 
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+.float-wa:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   --- 11. SUB-PAGES STYLES (About, Contact, dll) ---
+   ========================================= */
+
+/* Header khusus halaman anak (lebih pendek dari Hero home) */
+.page-header {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../image/hero-bg.jpg'); /* Pastikan path gambar benar */
+    background-size: cover;
+    background-position: top center;
+    height: 75vh; /* Tinggi 40% layar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    margin-top: 0; /* Reset margin karena body sudah ada padding-top */
+}
+
+.header-content h1 { 
+    font-size: 4rem; 
+    margin-bottom: 1rem; 
+}
+
+.header-content p { 
+    font-size: 1.8rem; 
+    letter-spacing: 0.2rem; 
+    text-transform: uppercase; 
+}
+
+/* About Section */
+.about-section { 
+    padding: 8rem 0; 
+    background: var(--white); 
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); /* Dua kolom responsif */
+    gap: 5rem;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.15);
+}
+
+.about-text h2 { 
+    font-size: 3rem; 
+    color: var(--primary-dark); 
+    margin-bottom: 2rem; 
+}
+
+.about-text p { 
+    font-size: 1.6rem; 
+    margin-bottom: 1.5rem; 
+    color: #555;
+    text-align: justify;
+}
+
+/* List Fitur Checkbox */
+.about-features { margin: 2rem 0; }
+
+.af-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.af-item i { color: #27ae60; /* Warna hijau centang */ }
+
+/* Social Icons */
+.social-connect {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.social-connect p { 
+    margin-bottom: 0; 
+    font-weight: bold; 
+}
+
+.social-icon {
+    width: 4rem;
+    height: 4rem;
+    background: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+.social-icon:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* Values Section (Kotak-kotak di bawah) */
+.values-section { 
+    padding: 6rem 0; 
+    background: var(--bg-light); 
+    text-align: center; 
+}
+
+.values-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.value-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 25rem;
+    transition: transform 0.3s;
+}
+
+.value-card:hover { transform: translateY(-0.5rem); }
+.value-card i { 
+    font-size: 4rem; 
+    color: var(--primary-color); 
+    margin-bottom: 1.5rem; 
+}
+
+.value-card h3 { 
+    font-size: 2rem; 
+    margin-bottom: 1rem; 
+}
+
+.value-card p { 
+    font-size: 1.4rem; 
+    color: #666; 
+}
+
+/* Responsive untuk page header text */
+@media screen and (max-width: 768px) {
+    .header-content h1 { font-size: 3rem; }
+    .page-header { height: 30vh; }
+}
+
+/* =========================================
+   --- 12. WORKFLOW SECTION (Split Layout) ---
+   ========================================= */
+
+.workflow {
+    padding: 8rem 0;
+    background-color: var(--white); /* Background putih bersih */
+}
+
+.workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr)); /* Split 2 kolom responsif */
+    gap: 6rem;
+    align-items: center; /* Vertikal center */
+}
+
+/* Kolom Kiri */
+.workflow-left .section-title {
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.workflow-left p {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+/* Kolom Kanan (List Item) */
+.wf-item {
+    display: flex; /* Ikon di kiri, Teks di kanan */
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+}
+
+.wf-icon {
+    flex-shrink: 0;
+    width: 6rem;
+    height: 6rem;
+    /* Ganti background biru transparan jadi Coklat Transparan */
+    background: rgba(141, 110, 99, 0.15);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+}
+
+.wf-text h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.wf-text p {
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+/* Responsif untuk HP */
+@media screen and (max-width: 768px) {
+    .workflow-grid {
+        grid-template-columns: 1fr; /* Jadi 1 kolom di HP */
+        gap: 4rem;
+    }
+    .workflow-left {
+        text-align: center; /* Rata tengah di HP */
+    }
+    .workflow-left .section-title {
+        text-align: center !important;
+    }
+}
+
+/* =========================================
+   --- 13. CONTACT PAGE STYLES ---
+   ========================================= */
+
+.contact-section {
+    padding: 8rem 0;
+    background-color: var(--white);
+}
+
+.contact-grid {
+    display: grid;
+    /* Membagi layout: Kiri Teks, Kanan Peta. Responsif. */
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 5rem;
+}
+
+/* Styling Info Kiri */
+.contact-info h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--primary-dark);
+}
+
+.contact-info > p { /* Teks deskripsi di bawah judul */
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+    color: #666;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.contact-item i {
+    width: 5rem;
+    height: 5rem;
+    background: var(--bg-light);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0; /* Agar ikon tidak gepeng */
+}
+
+.contact-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.contact-item p {
+    font-size: 1.6rem;
+    color: var(--text-light);
+}
+
+/* Styling Peta Kanan (Responsive Map) */
+.contact-map {
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden; /* Agar sudut peta ikut melengkung */
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
+    height: 100%;
+    min-height: 40rem; /* Tinggi minimal peta */
+}
+
+/* --- TAMBAHKAN KODE INI --- */
+/* Class ini memaksa pembungkus iframe untuk ikut tinggi induknya */
+.map-responsive {
+    height: 100%;
+    width: 100%;
+}
+
+.map-responsive iframe {
+    width: 100%;
+    height: 100% !important; /* Tambahkan !important agar menimpa atribut height HTML */
+    min-height: 45rem; /* Pastikan tinggi peta cukup */
+    display: block;
+    border: 0; /* Menghilangkan border bawaan iframe jika ada */
+}
+
+/* Responsive adjustment */
+@media screen and (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* 1 Kolom di HP */
+        gap: 3rem;
+    }
+    .contact-map {
+        order: -1; /* Opsi: Pindahkan peta ke atas info di HP jika mau (opsional) */
+    }
+}
+
+/* =========================================
+   --- 14. PRICE LIST STYLES ---
+   ========================================= */
+
+.price-section {
+    padding: 6rem 0;
+    background-color: var(--bg-light);
+}
+
+.price-category {
+    background: var(--white);
+    padding: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.05);
+    margin-bottom: 5rem; /* Jarak antar kategori */
+}
+
+.category-title {
+    font-size: 2.4rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-desc {
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+}
+
+/* TABLE STYLES */
+.table-responsive {
+    overflow-x: auto; /* Agar tabel bisa discroll di HP */
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 60rem; /* Lebar minimum agar tidak gepeng di HP */
+}
+
+.price-table th, .price-table td {
+    padding: 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 1.6rem;
+}
+
+.price-table th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+}
+
+.price-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Badge (Label Hari) */
+.badge {
+    background-color: var(--primary-color); /* Ikut warna tema (Coklat) */
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+.badge.yellow {
+    background-color: #D4AF37; /* Emas (Gold) ganti kuning terang */ 
+    color: #fff; 
+}
+
+.badge.red { 
+    background-color: #cf8164ff; /* Coklat Kemerahan atau biarkan merah */ 
+}
+
+/* UNIT PRICE GRID (Harga Satuan) */
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 3rem;
+}
+
+.unit-card {
+    border: 1px solid #eee;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.unit-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.unit-card ul li {
+    display: flex;
+    justify-content: space-between; /* Nama di kiri, Harga di kanan */
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 0.5rem;
+}
+
+.unit-card ul li span:last-child {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+/* =========================================
+   --- 15. ORDER PAGE STYLES ---
+   ========================================= */
+
+.order-section {
+    padding: 6rem 0;
+    background-color: var(--bg-light);
+}
+
+.order-wrapper {
+    max-width: 60rem; /* Membatasi lebar form agar tidak terlalu lebar */
+    margin: 0 auto; /* Posisi tengah */
+    background: var(--white);
+    padding: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 2rem;
+}
+
+.form-header h2 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: var(--text-light);
+    font-size: 1.4rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.btn-block {
+    width: 100%; /* Tombol full width */
+    margin-top: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
